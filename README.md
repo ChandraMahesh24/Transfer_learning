@@ -1,3 +1,4 @@
+readme_content = """
 YOLOv8 Selective Transfer Learning for Luggage Detection
 =========================================================
 
@@ -60,17 +61,13 @@ Model Initialization:
 
 Selective Transfer Learning Workflow:
 -------------------------------------
-### 🔁 Selective Transfer Learning Workflow
-
-- 🧠 Start with **COCO Pre-trained Model**
-  ⬇️
-- 🎯 Preserve knowledge of:  
-  `Person`, `Backpack`, `Handbag`, `Suitcase`
-  ⬇️
-- 🛠️ Fine-tune on your **Custom Dataset**
-  ⬇️
-- ✅ Achieve **Optimized Luggage Detection Model**
-
+COCO Pre-trained Model  
+        ↓  
+Preserve: Person, Backpack, Handbag, Suitcase  
+        ↓  
+Fine-tune on Custom Dataset  
+        ↓  
+Optimized Detection Model
 
 ---------------------------------------------------------
 
@@ -150,9 +147,9 @@ Model Export:
 -------------
 Export the model to different formats:
 
-model.export(format='onnx')    # ONNX for inference
-model.export(format='engine')  # TensorRT for GPU
-model.save('final_model.pt')   # PyTorch for further training
+model.export(format='onnx')     # ONNX format
+model.export(format='engine')   # TensorRT for GPU
+model.save('final_model.pt')    # PyTorch format
 
 ---------------------------------------------------------
 
@@ -192,3 +189,10 @@ References:
 - Ultralytics YOLOv8: https://docs.ultralytics.com
 - COCO Dataset: https://cocodataset.org
 - Roboflow: https://roboflow.com
+"""
+
+# Save to a .text file
+with open("README.text", "w") as file:
+    file.write(readme_content)
+
+print("README.text has been created.")
