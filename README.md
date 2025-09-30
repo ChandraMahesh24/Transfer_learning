@@ -62,11 +62,11 @@ Selective Transfer Learning Workflow:
 -------------------------------------
 COCO Pre-trained Model
         ↓
-Preserve: Person, Backpack, Handbag, Suitcase
+Preserve: person, backpack, handbag, suitcase knowledge
         ↓
-Fine-tune on Custom Dataset
+Fine-tune on custom dataset
         ↓
-Optimized Model for Luggage Detection
+Optimized detection model
 
 ---------------------------------------------------------
 
@@ -146,9 +146,9 @@ Model Export:
 -------------
 Export the model to different formats:
 
-model.export(format='onnx')     # ONNX format
-model.export(format='engine')   # TensorRT for GPU
-model.save('final_model.pt')    # PyTorch format
+model.export(format='onnx')    # ONNX for inference
+model.export(format='engine')  # TensorRT for GPU
+model.save('final_model.pt')   # PyTorch for further training
 
 ---------------------------------------------------------
 
