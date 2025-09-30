@@ -60,13 +60,17 @@ Model Initialization:
 
 Selective Transfer Learning Workflow:
 -------------------------------------
-COCO Pre-trained Model
-        ↓
-Preserve: person, backpack, handbag, suitcase knowledge
-        ↓
-Fine-tune on custom dataset
-        ↓
-Optimized detection model
+### 🔁 Selective Transfer Learning Workflow
+
+- 🧠 Start with **COCO Pre-trained Model**
+  ⬇️
+- 🎯 Preserve knowledge of:  
+  `Person`, `Backpack`, `Handbag`, `Suitcase`
+  ⬇️
+- 🛠️ Fine-tune on your **Custom Dataset**
+  ⬇️
+- ✅ Achieve **Optimized Luggage Detection Model**
+
 
 ---------------------------------------------------------
 
