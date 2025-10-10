@@ -187,4 +187,56 @@ Export Options:
 ===============================================================
 - Ultralytics YOLOv8 Docs: https://docs.ultralytics.com  
 - COCO Dataset: https://cocodataset.org  
-- Roboflow: https://roboflow.com  
+- Roboflow: https://roboflow.com
+
+
+
+
+mask_ratio Explained
+
+The mask_ratio parameter controls the resolution of segmentation masks compared to the input image, especially in instance segmentation tasks (e.g. YOLO with masks or other segmentation models).
+What does mask_ratio: 4 mean?
+
+A mask_ratio of 4 means:
+
+The masks are stored and processed at 1/4 the resolution of the input image.
+
+This makes training and inference faster and more memory-efficient.
+
+📸 Example
+
+If your input image size is:
+
+640 × 640 pixels
+
+
+And you set:
+
+mask_ratio: 4
+
+
+Then the mask size used during training becomes:
+
+640 ÷ 4 = 160
+=> Mask size = 160 × 160 pixels
+
+
+So, instead of using a full 640×640 mask, the model processes a 160×160 mask internally.
+⚡ Why Use a Smaller Mask?
+
+Using a smaller mask has several advantages:
+
+✅ Faster training (less computation)
+
+✅ Lower GPU memory usage
+
+✅ Sufficient accuracy for many practical tasks
+
+🔁 Masks can be upscaled during inference if needed
+
+📈 Trade-off Table
+mask_ratio	Mask Size (for 640×640 image)	Pros	Cons
+1	640 × 640	High accuracy	High memory, slower training
+2	320 × 320	Balanced speed & detail	Slight loss in fine details
+4	160 × 160	Fast, efficient	May lose some edge accuracy
+8	80 × 80	Very fast, low memory usage	Coarse masks, less precision
