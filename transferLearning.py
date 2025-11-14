@@ -1,6 +1,6 @@
 """
 ===========================================================================
- 🚀 HYBRID YOLOv8 MODEL TRAINING SCRIPT
+  HYBRID YOLOv8 MODEL TRAINING SCRIPT
  COCO Pretrained + Custom Dataset (Roboflow)
  Classes: backpack, handbag, helmet, person, suitcase, without helmet
 ===========================================================================
@@ -28,7 +28,7 @@
 
 
 # ========================================================================
-# 📦 IMPORT LIBRARIES
+#  IMPORT LIBRARIES
 # ========================================================================
 import os
 import yaml
@@ -43,7 +43,7 @@ from IPython.display import display, Image
 
 
 # ========================================================================
-# ⚙️ CONFIGURATION
+#  CONFIGURATION
 # ========================================================================
 ROBOFLOW_API_KEY = "<YOUR_API_KEY>"
 ROBOFLOW_WORKSPACE = "<YOUR_WORKSPACE>"
@@ -64,9 +64,9 @@ TARGET_CLASSES = [
 
 
 # ========================================================================
-# 📥 DOWNLOAD DATASET FROM ROBOFLOW
+#  DOWNLOAD DATASET FROM ROBOFLOW
 # ========================================================================
-print("📥 Downloading dataset from Roboflow...")
+print(" Downloading dataset from Roboflow...")
 
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 project = rf.workspace(ROBOFLOW_WORKSPACE).project(ROBOFLOW_PROJECT)
@@ -74,11 +74,11 @@ version = project.version(ROBOFLOW_VERSION)
 dataset = version.download("yolov8")
 
 DATASET_PATH = dataset.location
-print(f"✅ Dataset downloaded at: {DATASET_PATH}")
+print(f" Dataset downloaded at: {DATASET_PATH}")
 
 
 # ========================================================================
-# 📂 PREPARE YOLOv8 DATASET STRUCTURE
+#  PREPARE YOLOv8 DATASET STRUCTURE
 # ========================================================================
 def prepare_dataset():
     """
@@ -115,21 +115,21 @@ def prepare_dataset():
                 os.path.join(FINAL_DATASET_DIR, 'labels', split, f)
             )
 
-    print("✅ Dataset structure prepared successfully!")
+    print(" Dataset structure prepared successfully!")
 
 
 prepare_dataset()
 
 
 # ========================================================================
-# 📝 CREATE data.yaml (Auto-generated)
+#  CREATE data.yaml (Auto-generated)
 # ========================================================================
 def create_final_yaml():
     """
     Creates YOLOv8 data.yaml dynamically using custom classes.
     """
 
-    print("📝 Creating data.yaml...")
+    print(" Creating data.yaml...")
 
     yaml_dict = {
         'path': FINAL_DATASET_DIR,
@@ -145,7 +145,7 @@ def create_final_yaml():
     with open(yaml_path, 'w') as f:
         yaml.dump(yaml_dict, f, default_flow_style=False)
 
-    print(f"✅ data.yaml created at: {yaml_path}")
+    print(f" data.yaml created at: {yaml_path}")
     return yaml_path
 
 
@@ -153,17 +153,17 @@ FINAL_DATA_YAML_PATH = create_final_yaml()
 
 
 # ========================================================================
-# 🔄 LOAD COCO-PRETRAINED YOLOv8 MODEL
+#  LOAD COCO-PRETRAINED YOLOv8 MODEL
 # ========================================================================
-print("\n🔄 Loading COCO-pretrained YOLOv8 model...")
+print("\n Loading COCO-pretrained YOLOv8 model...")
 
 model = YOLO(f"yolov8{MODEL_SIZE}.pt")
 
-print(f"✅ Loaded model: YOLOv8{MODEL_SIZE} ({len(model.names)} COCO classes)")
+print(f" Loaded model: YOLOv8{MODEL_SIZE} ({len(model.names)} COCO classes)")
 
 
 # ========================================================================
-# ⚙️ HYBRID TRAINING CONFIGURATION
+#  HYBRID TRAINING CONFIGURATION
 # ========================================================================
 training_config = {
 
@@ -218,19 +218,19 @@ training_config = {
 
 
 # ========================================================================
-# 🚀 TRAIN THE MODEL
+#  TRAIN THE MODEL
 # ========================================================================
-print("\n🎯 Starting hybrid training (COCO pretrained + custom dataset)...")
+print("\n Starting hybrid training (COCO pretrained + custom dataset)...")
 
 results = model.train(**training_config)
 
-print("\n✅ Training completed!")
+print("\n Training completed!")
 
 
 # ========================================================================
-# 📊 PLOT TRAINING METRICS
+#  PLOT TRAINING METRICS
 # ========================================================================
-print("\n📈 Generating training graphs...")
+print("\n Generating training graphs...")
 
 results_csv = os.path.join(results.save_dir, "results.csv")
 
@@ -267,13 +267,13 @@ if os.path.exists(results_csv):
     plt.show()
 
 else:
-    print("⚠️ results.csv not found → metrics skipped.")
+    print(" results.csv not found → metrics skipped.")
 
 
 # ========================================================================
-# 🧪 VALIDATION ON TEST SET
+#  VALIDATION ON TEST SET
 # ========================================================================
-print("\n📊 Running final validation...")
+print("\n Running final validation...")
 
 metrics = model.val(
     data=FINAL_DATA_YAML_PATH,
@@ -283,7 +283,7 @@ metrics = model.val(
     plots=True
 )
 
-print("\n📈 FINAL VALIDATION METRICS")
+print("\n FINAL VALIDATION METRICS")
 print("=" * 60)
 print(f"mAP50     : {metrics.box.map50:.4f}")
 print(f"mAP50-95  : {metrics.box.map:.4f}")
@@ -296,7 +296,7 @@ print("=" * 60)
 
 
 # ========================================================================
-# 🎯 OPTIMIZE CONFIDENCE THRESHOLD
+#  OPTIMIZE CONFIDENCE THRESHOLD
 # ========================================================================
 def optimize_confidence(model):
     """
@@ -332,7 +332,7 @@ def optimize_confidence(model):
     plt.grid(True)
     plt.show()
 
-    print(f"🎯 Best Confidence Threshold: {best_conf:.3f}")
+    print(f" Best Confidence Threshold: {best_conf:.3f}")
     return best_conf
 
 
@@ -340,9 +340,9 @@ best_conf = optimize_confidence(model)
 
 
 # ========================================================================
-# 🧩 VISUAL COMPARISON: COCO MODEL VS HYBRID MODEL
+#  VISUAL COMPARISON: COCO MODEL VS HYBRID MODEL
 # ========================================================================
-print("\n🧩 Comparing COCO vs Fine-tuned model...")
+print("\n Comparing COCO vs Fine-tuned model...")
 
 coco_model = YOLO(f"yolov8{MODEL_SIZE}.pt")
 
@@ -355,7 +355,7 @@ test_images = [
 
 for img_path in test_images:
 
-    print(f"\n🔍 Image: {os.path.basename(img_path)}")
+    print(f"\n Image: {os.path.basename(img_path)}")
 
     base_pred = coco_model(img_path, conf=0.25, save=True, project='compare_coco', name='pred')
     hybrid_pred = model(img_path, conf=best_conf, save=True, project='compare_hybrid', name='pred')
@@ -376,13 +376,13 @@ for img_path in test_images:
 
 
 # ========================================================================
-# 💾 SAVE FINAL MODEL
+#  SAVE FINAL MODEL
 # ========================================================================
 FINAL_MODEL_PATH = "yolov8_hybrid_focus6_final.pt"
 model.save(FINAL_MODEL_PATH)
 
-print("\n💾 Final hybrid model saved at:", FINAL_MODEL_PATH)
-print("\n🎉 Training complete!")
+print("\n Final hybrid model saved at:", FINAL_MODEL_PATH)
+print("\n Training complete!")
 print("Your YOLOv8 Hybrid Model includes:")
 print(" ✔ COCO Pretrained Knowledge")
 print(" ✔ Custom Dataset Fine-tuning")
