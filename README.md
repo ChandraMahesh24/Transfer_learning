@@ -67,7 +67,7 @@ Below is a detailed explanation of every hyperparameter used in this project.
   imgsz: 640	Image size used for training. Higher = more accuracy but more VRAM usage.
   batch: 32	Number of images per batch. Lower if GPU has low VRAM.
   device: cuda/cpu	Automatically selects GPU if available.
-
+```bash
   | Hyperparameter         | Meaning & Reason                                                         |
 | ---------------------- | ------------------------------------------------------------------------ |
 | `pretrained: True`     | Loads COCO-pretrained weights for faster, better training.               |
@@ -115,32 +115,28 @@ Below is a detailed explanation of every hyperparameter used in this project.
 | `name: hybrid_focus6_m`           | Training run name.                   |
 | `exist_ok: True`                  | Overwrite allowed.                   |
 | `verbose: True`                   | Detailed console logs.               |
-
+ ```
 📈 Output Metrics
 
 After training, the script prints:
-
-mAP50
-
-mAP50-95
-
-Precision
-
-Recall
-
-Confusion matrix
-
-PR curve
-
-Loss curves
+  mAP50
+  mAP50-95
+  Precision
+  Recall
+  Confusion matrix
+  PR curve
+  Loss curves
+  
 ```bash
 python train.py
 ```
+
 ```bash
 from ultralytics import YOLO
 model = YOLO("yolov8_hybrid_focus6_final.pt")
 res = model("test.jpg", save=True)
 ```
+
 ```bash
 yolov8_hybrid_focus6_final.pt
 ```
