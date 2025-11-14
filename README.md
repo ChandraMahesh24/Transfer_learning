@@ -143,18 +143,6 @@ yolov8_hybrid_focus6_final.pt
 
 
 
-Below is a **very clear, deeply detailed, professional explanation of ALL hyperparameters**, 
-
-This covers:
-
-✔ What each hyperparameter means
-✔ Why it is used
-✔ Why it is important
-✔ How it affects training
-✔ When to increase/decrease it
-
----
-
 # 📘 **Detailed Explanation of YOLOv8 Hyperparameters (Why, When, Importance)**
 
 YOLO models depend heavily on hyperparameters. Each one controls part of the training process such as optimization, augmentation, or regularization. Understanding them helps you **improve accuracy**, **prevent overfitting**, and **stabilize training**.
